@@ -1,12 +1,12 @@
-import {NavigationContainer} from '@react-navigation/native';
-import TabRoutes from './tab.routes';
+import { NavigationContainer} from '@react-navigation/native';
+import DrawerRoutes from './drawer.routes';
 
 export default function Routes(){
     {/* Contexto de navegação */}
     return (
         <NavigationContainer>
             {/* Dentro do navigation container se coloca a estratégia de navegação */}
-            <TabRoutes />
+            <DrawerRoutes />
         </NavigationContainer>
     )
 }
