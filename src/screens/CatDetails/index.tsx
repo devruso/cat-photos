@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
+import Header from '../../components/Header';
+import { Container, Text} from './styles';
+import { useNavigation } from '@react-navigation/native';
 
-export default function CatDetails() {
+
+export default function CatDetails({route} : any) {
+  const {name} = route.params || '';
+  const navigator = useNavigation();
+
   return (
-    <View style={styles.container}>
-      <Text>Cat Details</Text>
-    </View>
+    <Container>
+        <Text>
+          {name}
+        </Text>
+
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f1f1f1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
