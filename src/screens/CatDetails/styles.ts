@@ -7,7 +7,13 @@ export const Container = styled.View`
   justify-content: center;
 `;
 
-export const Text = styled.View`
+export const Text = styled.Text`
     font-size: 24px;
     color : ${({theme}) => theme.COLORS.DARK1};
 `
+
+export const StyledImage = styled.Image`
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+`;

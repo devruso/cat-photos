@@ -1,18 +1,17 @@
 import Header from '../../components/Header';
-import { Container, Text} from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { Container, Text, StyledImage} from './styles';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
-
-export default function CatDetails({route} : any) {
-  const {name} = route.params || '';
-  const navigator = useNavigation();
+export default function CatDetails({route} : CatDetailsProps) {
+  const { name, image, breed } = route.params || '';
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <Container>
-        <Text>
-          {name}
-        </Text>
-
+      <Header onPress={() => navigation.navigate('Home')} />
+      <StyledImage source={{ uri: image }} />
+      <Text>{name}</Text>
+      <Text>{breed}</Text>
     </Container>
   );
 }
