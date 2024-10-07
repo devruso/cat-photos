@@ -4,11 +4,11 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 export const Container = styled.View`
     width: 100%;
     height: 60px;
-    background-color: #f1f1f1;
+    background-color: ${({theme}) => theme.COLORS.PRIMARY1};
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 12px 20px;
 `;
 
 export const Text = styled.Text`
