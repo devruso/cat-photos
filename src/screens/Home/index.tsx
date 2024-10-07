@@ -1,36 +1,63 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import Header from '../../components/Header';
-import {CatCard, CatImage, DescriptionText , Container, Content, Text} from './styles'
-
+import {
+  Container,
+  Content,
+  LoadingSpinner,
+  SearchContainer,
+  SearchInput,
+  TextTitle,
+} from "./styles";
+import CatCardComponent from "../../components/CatCardComponent";
+import { FlatList } from "react-native-gesture-handler";
+import { useCatData } from "../../hooks/useCatData";
+import PaginationComponent from "../../components/PaginationComponent";
 
 export default function Home() {
-  const cats: Cat[] = [
-    { name: 'Cat 1', breed: 'Breed 1', image: 'https://via.placeholder.com/150' },
-    { name: 'Cat 2', breed: 'Breed 2', image: 'https://via.placeholder.com/150' },
-    { name: 'Cat 3', breed: 'Breed 3', image: 'https://via.placeholder.com/150' },
-    { name: 'Cat 4', breed: 'Breed 4', image: 'https://via.placeholder.com/150' },
-    { name: 'Cat 5', breed: 'Breed 5', image: 'https://via.placeholder.com/150' },
-  ];  
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { data: cats, isLoading } = useCatData();
 
-  return (    
+  console.log(cats);
+
+  const renderCats = (cat: any) => {
+    return (
+      <CatCardComponent
+        key={cat.id}
+        route={{
+          params: {
+            id: cat.id,
+            name: cat.breeds[0].name,
+            image: cat.image,
+            breed: {
+              name: cat.breeds[0].name,
+              description: cat.breeds[0].description,
+              temperament: cat.breeds[0].temperament,
+            },
+          },
+        }}
+      />
+    );
+  };
+
+  return (
     <Container>
       <Content>
-          {cats.map((cat, index) => {
-            return (
-              <CatCard key={index}
-              onPress={() => navigation.navigate('Cat Details', cat)}
-
-              >
-                <CatImage source={{uri: cat.image}} alt={cat.name} />
-                <DescriptionText>{cat.name}</DescriptionText>
-                <DescriptionText>{cat.breed}</DescriptionText>
-            </CatCard>
-            );
-          })}
+        <TextTitle>Cat Photos</TextTitle>
+        <SearchContainer>
+          <SearchInput placeholder="Search a breed" />
+        </SearchContainer>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <FlatList
+          data={cats}
+          renderItem={({ item }) => renderCats(item)}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={{ gap: 20, paddingBottom: 8 }}
+        />
+        )}
+        
+      <PaginationComponent/>
       </Content>
+
     </Container>
   );
 }
-
-

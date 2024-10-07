@@ -1,3 +1,4 @@
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
@@ -5,17 +6,14 @@ export const Container = styled.SafeAreaView`
     background-color: ${({theme}) => theme.COLORS.BACKGROUND};
     justify-content: center;
     align-items: center;
-    margin-top: 200px;
 `;
 
 export const Content = styled.View`
     width: 100%;
-    margin: 30px;
-    padding: 20px;
-    flex-direction: row;
-    justify-content: space-around;
+    margin-top: 30px;
+    flex: 1;
+    align-items: center;
     background-color: ${({theme}) => theme.COLORS.PRIMARY2};
-    flex-wrap: wrap;
 `
 
 export const Text = styled.Text`
@@ -23,26 +21,35 @@ export const Text = styled.Text`
     margin-top: 10px;
 `
 
-export const DescriptionText= styled.Text`
-    font-size: 18px;
-    color : ${({theme}) => theme.COLORS.TEXT};
+export const TextTitle = styled.Text`
+    font-size: 36px;
+    margin-top: 10px;
+    color: ${({theme}) => theme.COLORS.DARK1};
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
 `
 
-export const CatCard = styled.TouchableOpacity`
-    background-color: ${({theme}) => theme.COLORS.BACKGROUND};
-    padding: 1px;
-    width: 45%;
-    border-radius: 20px;
-    align-items: center;
-    margin: 10px 0px;
-    height: 200px;
-    border: 2px solid ${({theme}) => theme.COLORS.SECONDARY1};
-    overflow: hidden;
-`
-
-export const CatImage = styled.Image`
+export const SearchContainer = styled.View`
     width: 100%;
-    height: 100px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-`;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+
+export const SearchInput = styled.TextInput`
+    width: 80%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: ${({theme}) => theme.COLORS.BACKGROUND};
+    padding: 10px;
+    margin-right: 10px;
+`
+
+export const LoadingSpinner = styled(ActivityIndicator).attrs(({ theme }) => ({
+    color: theme.COLORS.DARK1,
+    size: 'large',
+  }))`
+    margin-top: 20px;
+  `;
